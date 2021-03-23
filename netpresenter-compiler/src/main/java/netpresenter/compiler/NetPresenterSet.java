@@ -102,9 +102,10 @@ class NetPresenterSet {
 
         MethodSpec netConstructor = MethodSpec.constructorBuilder()
                 .addModifiers(Modifier.PUBLIC)
-                .addParameter(mServiceForOne ? ClassName.get(((TypeElement) mNetPresenterElement.getEnclosingElement()).asType()) : ObjectClassName, "target")
+//                .addParameter(mServiceForOne ? ClassName.get(((TypeElement) mNetPresenterElement.getEnclosingElement()).asType()) : ObjectClassName, "target")
+                .addParameter(Object.class, "target")
                 .addParameter(String[].class, "notCancelTags")
-                .addStatement("mTarget = target")
+                .addStatement("mTarget = $Ntarget", mServiceForOne ? "(" + mNetPresenterElement.getEnclosingElement().getSimpleName() + ")" : "")
                 .addStatement("mNotCancelTags = notCancelTags")
                 .addStatement("mNetBuilder = new $T()", mNetBuilderElement.asType())
                 .addStatement("mNetUnits = new $T<$T,$T>()", LinkedHashMap.class, String.class, INetUnit.class)

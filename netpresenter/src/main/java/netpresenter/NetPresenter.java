@@ -27,7 +27,7 @@ public final class NetPresenter {
     }
 
     private static List<INetBinder> createNetPresenterForClass(Object target) {
-        List binders = new ArrayList();
+        List<INetBinder> binders = new ArrayList();
         Class<?> cls = target.getClass();
         for (Field field : cls.getDeclaredFields()) {
             NetService netService = field.getAnnotation(NetService.class);
@@ -50,7 +50,7 @@ public final class NetPresenter {
                     field.setAccessible(true);
                     field.set(target, binder);
                 } catch (NullPointerException e) {
-                    throw new NetPresenterException("Can't find" + field.getType().getName() + "_NetPresenter");
+                    throw new NetPresenterException("Can't find " + field.getType().getName() + "_NetPresenter");
                 } catch (InstantiationException e) {
                     e.printStackTrace();
                 } catch (IllegalAccessException e) {
