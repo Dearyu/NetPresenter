@@ -1,14 +1,14 @@
 # NetPresenter
 
-#### 简介:
+## 简介:
 
  	NetPresenter是一款基于retrofit2的轻量级无侵入的快速网络请求开发工具,使用 apt技术自动生成网络代理层代码,减轻编码负担,加快编码速度.
+	
+	
 
-​	
+## 使用方法:
 
-#### 使用方法:
-
-##### 第一步:
+### 第一步:
 
 添加依赖
 
@@ -41,7 +41,7 @@ dependencies {
 }
 ```
 
-##### 第二步:
+### 第二步:
 
 配置相关内容:
 
@@ -198,7 +198,7 @@ public abstract class BaseObserver<T extends BaseResponseBean> implements Observ
 }
 ```
 
-##### 第三步:
+### 第三步:
 
 使用NetPresenter
 
@@ -258,7 +258,7 @@ public class DemoActivity extends AppCompatActivity {
 
 
 
-#### 更多用法:
+## 更多用法:
 
 1.@NetService中可以设置value值,与@NetCallBack中value值相对应
 
@@ -288,7 +288,7 @@ public void getDemoTwoServiceFinish(String tag) {
 
 
 
-#### Tips
+## Tips
 
 - retrofit service需功能单一,不能加入其它无用成员,方法等
 
