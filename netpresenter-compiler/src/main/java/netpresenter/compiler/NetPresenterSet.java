@@ -95,7 +95,7 @@ class NetPresenterSet {
                 .addModifiers(Modifier.PUBLIC)
                 .addSuperinterface(mNetPresenterTypeElement.asType())
                 .addSuperinterface(INetBinder.class)
-                .addField(mServiceForOne ? ClassName.get(((TypeElement) mNetPresenterElement.getEnclosingElement()).asType()) : ObjectClassName, "mTarget", Modifier.PRIVATE)
+                .addField(mServiceForOne ? ClassName.get(mNetPresenterElement.getEnclosingElement().asType()) : ObjectClassName, "mTarget", Modifier.PRIVATE)
                 .addField(INetBuilder.class, "mNetBuilder", Modifier.PRIVATE)
                 .addField(ParameterizedTypeName.get(MapClassName, TypeName.get(String.class), TypeName.get(INetUnit.class)), "mNetUnits")
                 .addField(String[].class, "mNotCancelTags");
@@ -170,12 +170,10 @@ class NetPresenterSet {
                             .returns(TypeName.get(executableElement.getReturnType()))
                             .addModifiers(Modifier.PUBLIC)
                             .addParameters(parms);
-                    if (mServiceForOne && !mHaveOverload) {
+                    if (!mHaveOverload) {
                         methodSpec.addStatement("$T tag = $S", String.class, executableElement.getSimpleName().toString());
                     } else {
                         methodSpec.addStatement("$T tag =new $T($S)", StringBuilder.class, StringBuilder.class, executableElement.getSimpleName().toString());
-                    }
-                    if (mHaveOverload) {
                         methodSpec.beginControlFlow("if (mNetUnits.containsKey(tag.toString())) ")
                                 .addStatement("tag.append($S)", "_" + executableElement.getParameters().size())
                                 .endControlFlow();
