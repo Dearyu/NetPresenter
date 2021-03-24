@@ -7,7 +7,6 @@ NetPresenter是一款基于retrofit2的轻量级无侵入的快速网络请求�
 
 	
 ## 使用方法:
-
 ### 第一步:
 
 添加依赖
@@ -260,7 +259,6 @@ public class DemoActivity extends AppCompatActivity {
 
 
 ## 更多用法:
-
 1.@NetService中可以设置value值,与@NetCallBack中value值相对应
 
 2.@NetService中可以设置notCancel ,值为字符串数组,规定NetPresenter.unBind时不取消的请求,格式为请求方法名
