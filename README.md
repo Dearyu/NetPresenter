@@ -6,8 +6,10 @@ NetPresenter是一款基于retrofit2的轻量级无侵入的快速网络请求�
 
 
 	
-## 使用方法:
-### 第一步:
+### 使用方法:
+
+
+#### 第一步:
 
 添加依赖
 
@@ -40,7 +42,7 @@ dependencies {
 }
 ```
 
-### 第二步:
+#### 第二步:
 
 配置相关内容:
 
@@ -197,7 +199,7 @@ public abstract class BaseObserver<T extends BaseResponseBean> implements Observ
 }
 ```
 
-### 第三步:
+#### 第三步:
 
 使用NetPresenter
 
@@ -258,7 +260,9 @@ public class DemoActivity extends AppCompatActivity {
 
 
 
-## 更多用法:
+### 更多用法:
+
+
 1.@NetService中可以设置value值,与@NetCallBack中value值相对应
 
 2.@NetService中可以设置notCancel ,值为字符串数组,规定NetPresenter.unBind时不取消的请求,格式为请求方法名
@@ -288,7 +292,8 @@ public void getDemoTwoServiceFinish(String tag) {
 
 
 
-## Tips
+### Tips
+
 
 - retrofit service需功能单一,不能加入其它无用成员,方法等
 
