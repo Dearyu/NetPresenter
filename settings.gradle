@@ -1,5 +1,5 @@
 include ':netpresenter-demo'
 include ':netpresenter-compiler'
-include ':netpresenter'
+include ':netpresenter-code'
 include ':app'
 rootProject.name = "netpresenter"
