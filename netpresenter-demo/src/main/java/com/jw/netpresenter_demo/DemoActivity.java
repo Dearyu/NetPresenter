@@ -1,21 +1,21 @@
 package com.jw.netpresenter_demo;
 
-import androidx.appcompat.app.AppCompatActivity;
-import okhttp3.RequestBody;
-
 import android.os.Bundle;
 import android.util.Log;
 
 import com.google.gson.Gson;
+import com.jw.netpresenter_demo.bean.BaseDataBean;
+import com.jw.netpresenter_demo.bean.NetRequest;
+import com.jw.netpresenter_demo.service.DemoRxJavaService;
+import com.jw.netpresenter_demo.service.DemoRxJavaTwoService;
+
+import androidx.appcompat.app.AppCompatActivity;
 import netpresenter.NetBinder;
 import netpresenter.NetPresenter;
 import netpresenter.annotations.CallBackType;
 import netpresenter.annotations.NetCallBack;
 import netpresenter.annotations.NetService;
-import com.jw.netpresenter_demo.bean.BaseDataBean;
-import com.jw.netpresenter_demo.bean.NetRequest;
-import com.jw.netpresenter_demo.service.DemoRxJavaService;
-import com.jw.netpresenter_demo.service.DemoRxJavaTwoService;
+import okhttp3.RequestBody;
 
 public class DemoActivity extends AppCompatActivity {
     // TAG

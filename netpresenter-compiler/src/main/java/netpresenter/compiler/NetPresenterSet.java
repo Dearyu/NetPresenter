@@ -97,7 +97,7 @@ class NetPresenterSet {
                 .addSuperinterface(INetBinder.class)
                 .addField(mServiceForOne ? ClassName.get(mNetPresenterElement.getEnclosingElement().asType()) : ObjectClassName, "mTarget", Modifier.PRIVATE)
                 .addField(INetBuilder.class, "mNetBuilder", Modifier.PRIVATE)
-                .addField(ParameterizedTypeName.get(MapClassName, TypeName.get(String.class), TypeName.get(INetUnit.class)), "mNetUnits")
+                .addField(ParameterizedTypeName.get(MapClassName, TypeName.get(String.class), ParameterizedTypeName.get(ListClassName, TypeName.get(INetUnit.class))), "mNetUnits")
                 .addField(String[].class, "mNotCancelTags");
 
         MethodSpec netConstructor = MethodSpec.constructorBuilder()
@@ -108,7 +108,7 @@ class NetPresenterSet {
                 .addStatement("mTarget = $Ntarget", mServiceForOne ? "(" + mNetPresenterElement.getEnclosingElement().getSimpleName() + ")" : "")
                 .addStatement("mNotCancelTags = notCancelTags")
                 .addStatement("mNetBuilder = new $T()", mNetBuilderElement.asType())
-                .addStatement("mNetUnits = new $T<$T,$T>()", LinkedHashMap.class, String.class, INetUnit.class)
+                .addStatement("mNetUnits = new $T<>()", LinkedHashMap.class)
                 .build();
         netPresenterType.addMethod(netConstructor);
 
@@ -117,7 +117,9 @@ class NetPresenterSet {
                 .addStatement("$T notCacncels= $T.asList(mNotCancelTags)", ListClassName, ArraysClassName)
                 .beginControlFlow("for (String key : mNetUnits.keySet())")
                 .addStatement("if (notCacncels.contains(key)) continue")
-                .addStatement("mNetUnits.get(key).cancelRequest()")
+                .beginControlFlow("for ($T net:mNetUnits.get(key))", INetUnit.class)
+                .addStatement("net.cancelRequest()")
+                .endControlFlow()
                 .endControlFlow()
                 .build();
         netPresenterType.addMethod(netBinder);
@@ -183,7 +185,12 @@ class NetPresenterSet {
                             mNetPresenterTypeElement.asType(),
                             executableElement.getSimpleName(), parmsStr.deleteCharAt(parmsStr.length() - 1),
                             typeSpec)
-                            .addStatement("mNetUnits.put(tag.toString(),netUnit)")
+                            .addStatement("List<$T> netUnits = mNetUnits.get(tag.toString())", INetUnit.class)
+                            .beginControlFlow("if (null  == netUnits)")
+                            .addStatement("netUnits = new $T()", ArrayList.class)
+                            .endControlFlow()
+                            .addStatement("netUnits.add(netUnit)")
+                            .addStatement("mNetUnits.put(tag.toString(),netUnits)")
                             .addStatement("return null")
                             .build();
                     netPresenterType.addMethod(methodSpec.build());
