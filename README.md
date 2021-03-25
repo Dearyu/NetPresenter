@@ -34,8 +34,8 @@ android {
 }
 
 dependencies {
-   implementation 'com.github.Dearyu:NetPresenter:1.0.7'
-   annotationProcessor 'com.github.Dearyu:NetPresenter:1.0.7'
+   implementation 'com.github.Dearyu:NetPresenter:1.1.0'
+   annotationProcessor 'com.github.Dearyu:NetPresenter:1.1.0'
 }
 ```
 
