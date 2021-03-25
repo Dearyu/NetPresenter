@@ -264,7 +264,8 @@ public class DemoActivity extends AppCompatActivity {
 2.@NetService中可以设置notCancel ,值为字符串数组,规定NetPresenter.unBind时不取消的请求,格式为请求方法名
 
 ```java
-@NetService(value = "serviceTwo", notCancel = {"getTwoMsg"}) DemoRxJavaTwoService mDemoRxJavaTwoService;
+@NetService(value = "serviceTwo", notCancel = {"getTwoMsg"})
+DemoRxJavaTwoService mDemoRxJavaTwoService;
 
 @NetCallBack(value = "serviceTwo", type = CallBackType.SUC)
 public void getDemoTwoServiceMsgSuc(String tag, Object bean) {
