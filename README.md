@@ -208,7 +208,7 @@ public abstract class BaseObserver<T extends BaseResponseBean> implements Observ
 public interface DemoRxJavaService {
 
     @GET("demo/test")
-    Observable<Object> getTestMsg(@Query("key") String key);
+    Observable<BaseData<Object>> getTestMsg(@Query("key") String key);
 }
 ```
 
@@ -254,7 +254,7 @@ public class DemoActivity extends AppCompatActivity {
 }
 ```
 
-**回调方法中tag为请求方法的方法名,SUC中bean为成功响应的请求结果,Fail中msgs为响应的错误信息 可根据需求自行配置 参考示例NetListener.**
+**回调方法参数格式固定,其中tag为请求方法的方法名,SUC中bean为成功响应的请求结果,Fail中msgs为响应的错误信息,可根据需求自行配置,参考示例NetListener. BaseResponseBean,BaseData为响应结果的公共格式类型,根据需求自行配置,参考netpresenter-demo bean**
 
 
 
