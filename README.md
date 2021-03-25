@@ -294,6 +294,6 @@ public void getDemoTwoServiceFinish(String tag) {
 
 - retrofit service中尽量避免重载方法,如果有,确认先后执行顺序,后执行的tag格式为tag_数字(参数个数)
 
-- 配合使用的插件[NetPresenterHelper](https://github.com/Dearyu/NetPresenter-Heler)
+- 配合使用的插件[NetPresenterHelper](https://github.com/Dearyu/NetPresenter-Helper)
 
 
