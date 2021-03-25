@@ -14,11 +14,11 @@ NetPresenter是一款基于retrofit2的轻量级无侵入的快速网络请求�
 
 ```groovy
 allprojects {
-		repositories {
-			...
-			maven { url 'https://jitpack.io' }
-		}
-	}
+  repositories {
+    ...
+    maven { url 'https://jitpack.io' }
+  }
+}
 ```
 
 2.开发项目中添加
@@ -214,8 +214,8 @@ public interface DemoRxJavaService {
 
 ```java
 public class DemoActivity extends AppCompatActivity {
-  	@NetService
-  	DemoRxJavaService mDemoRxJavaService;
+    @NetService
+    DemoRxJavaService mDemoRxJavaService;
     // bind
     private NetBinder mBind;
   
