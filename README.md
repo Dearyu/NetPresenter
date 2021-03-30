@@ -2,7 +2,7 @@
 
 ### 简介:
 NetPresenter是一款基于retrofit2的轻量级无侵入的快速网络请求开发工具,使用 apt技术自动生成网络代理层代码,减轻编码负担,加快编码速度.
-(配合使用的插件[NetPresenterPlugin](https://github.com/Dearyu/NetPresenter-Plugin))
+(配合使用的插件[NetPresenterHelper](https://github.com/Dearyu/NetPresenter-Helper))
 
 	
 ### 使用方法:  
@@ -294,6 +294,6 @@ public void getDemoTwoServiceFinish(String tag) {
 
 - retrofit service中尽量避免重载方法,如果有,确认先后执行顺序,后执行的tag格式为tag_数字(参数个数)
 
-- 配合使用的插件[NetPresenterPlugin](https://github.com/Dearyu/NetPresenter-Plugin)
+- 配合使用的插件[NetPresenterHelper](https://github.com/Dearyu/NetPresenter-Helper)
 
 
