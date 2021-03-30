@@ -183,7 +183,7 @@ class NetPresenterSet {
                     methodSpec.addStatement("$T netUnit = new $T().setObservable(mNetBuilder.create($T.class).$N($N)).request($L)",
                             INetUnit.class, mNetUnitElement.asType(),
                             mNetPresenterTypeElement.asType(),
-                            executableElement.getSimpleName(), parmsStr.deleteCharAt(parmsStr.length() - 1),
+                            executableElement.getSimpleName(), NetPresenterUtil.isEmpty(parmsStr.toString()) ? "" : parmsStr.deleteCharAt(parmsStr.length() - 1),
                             typeSpec)
                             .addStatement("List<$T> netUnits = mNetUnits.get(tag.toString())", INetUnit.class)
                             .beginControlFlow("if (null  == netUnits)")
