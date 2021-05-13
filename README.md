@@ -287,6 +287,29 @@ public void getDemoTwoServiceFinish(String tag) {
 
 **更多示例 参考netpresenter-demo DemoActivity**
 
+### 混淆
+```xml
+## NetPresenter
+-keep class netpresenter.** { *; }
+-dontwarn com.netpresenter.**
+-keep class **$$NetPresenter { *; }
+-keepnames class * implements netpresenter.iface.INetBinder{
+
+}
+-keepclasseswithmembernames class * {
+    @netpresenter.* <fields>;
+}
+
+-keepclasseswithmembernames class * {
+    @netpresenter.* <methods>;
+}
+
+#使用@NetService的属性 避免混淆
+-keep class *{
+  @netpresenter.annotations.NetService <fields>;
+}
+
+```
 
 ### Tips  
 
