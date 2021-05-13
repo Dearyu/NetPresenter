@@ -304,7 +304,7 @@ public void getDemoTwoServiceFinish(String tag) {
     @netpresenter.* <methods>;
 }
 
-#使用@NetService的属性 避免混淆
+#@NetService避免混淆
 -keep class *{
   @netpresenter.annotations.NetService <fields>;
 }
