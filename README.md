@@ -292,7 +292,6 @@ public void getDemoTwoServiceFinish(String tag) {
 ## NetPresenter
 -keep class netpresenter.** { *; }
 -dontwarn com.netpresenter.**
--keep class **$$NetPresenter { *; }
 -keepnames class * implements netpresenter.iface.INetBinder{
 
 }
@@ -304,7 +303,7 @@ public void getDemoTwoServiceFinish(String tag) {
     @netpresenter.* <methods>;
 }
 
-#@NetService避免混淆
+# @NetService避免混淆
 -keep class *{
   @netpresenter.annotations.NetService <fields>;
 }
