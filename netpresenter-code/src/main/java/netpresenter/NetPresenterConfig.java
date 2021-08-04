@@ -10,4 +10,6 @@ package netpresenter;
 public interface NetPresenterConfig {
 
     String DEFAULT_VALUE = "DEF_NET_PRESENTER";
+
+    String DEFAULT_TAG = "";
 }

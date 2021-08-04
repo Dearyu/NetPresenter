@@ -35,6 +35,8 @@ import javax.lang.model.type.TypeKind;
  * @Version 1.0
  * @CreateDate 2021/3/16
  * @QQ 1007271386Ø
+ * <p>
+ * v1.3 成功回调进行拆分
  */
 class NetPresenterSet {
 
@@ -214,10 +216,18 @@ class NetPresenterSet {
                 ExecutableElement callMethod = null;
                 for (ExecutableElement element : entry.getValue()) {
                     NetCallBack callBack = element.getAnnotation(NetCallBack.class);
-                    if (null != callBack && callBack.value().equals(netService.value())
+                    if (null != callBack
+                            && callBack.value().equals(netService.value())
                             && type == callBack.type()) {
-                        callMethod = element;
-                        break;
+                        if (!NetPresenterUtil.isEmpty(callBack.tag())) {
+                            if (callBack.tag().equals(element.getSimpleName().toString())) {
+                                callMethod = element;
+                                break;
+                            }
+                        } else {
+                            callMethod = element;
+                            break;
+                        }
                     }
                 }
                 if (null != callMethod) {

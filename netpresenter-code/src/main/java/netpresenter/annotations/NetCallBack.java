@@ -21,5 +21,7 @@ public @interface NetCallBack {
 
     String value() default NetPresenterConfig.DEFAULT_VALUE;
 
+    String tag() default NetPresenterConfig.DEFAULT_TAG;
+
     CallBackType type() default CallBackType.SUC;
 }
