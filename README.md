@@ -35,8 +35,8 @@ android {
 }
 
 dependencies {
-   implementation 'com.github.Dearyu:NetPresenter:1.1.0'
-   annotationProcessor 'com.github.Dearyu:NetPresenter:1.1.0'
+   implementation 'com.github.Dearyu:NetPresenter:1.2.0'
+   annotationProcessor 'com.github.Dearyu:NetPresenter:1.2.0'
 }
 ```
 
@@ -287,6 +287,28 @@ public void getDemoTwoServiceFinish(String tag) {
 
 **更多示例 参考netpresenter-demo DemoActivity**
 
+### 混淆
+```xml
+## NetPresenter
+-keep class netpresenter.** { *; }
+-dontwarn com.netpresenter.**
+-keepnames class * implements netpresenter.iface.INetBinder{
+
+}
+-keepclasseswithmembernames class * {
+    @netpresenter.* <fields>;
+}
+
+-keepclasseswithmembernames class * {
+    @netpresenter.* <methods>;
+}
+
+# @NetService避免混淆
+-keep class *{
+  @netpresenter.annotations.NetService <fields>;
+}
+
+```
 
 ### Tips  
 
