@@ -28,6 +28,7 @@ import javax.lang.model.element.Modifier;
 import javax.lang.model.element.TypeElement;
 import javax.lang.model.element.VariableElement;
 import javax.lang.model.type.TypeKind;
+import javax.swing.text.html.HTML;
 
 /**
  * @Author junweiliu
@@ -147,23 +148,23 @@ class NetPresenterSet {
                                     + "<" + returnType + ">"))
                             .addMethod(MethodSpec.methodBuilder("onStart")
                                     .addModifiers(Modifier.PUBLIC)
-                                    .addCode(getCallBackCode(CallBackType.START))
+                                    .addCode(getCallBackCode(CallBackType.START, ""))
                                     .returns(void.class)
                                     .build())
                             .addMethod(MethodSpec.methodBuilder("onFinished")
                                     .addModifiers(Modifier.PUBLIC)
-                                    .addCode(getCallBackCode(CallBackType.FINISH))
+                                    .addCode(getCallBackCode(CallBackType.FINISH, ""))
                                     .returns(void.class)
                                     .build())
                             .addMethod(MethodSpec.methodBuilder("onSuc")
                                     .addParameter(TypeVariableName.get(returnType), "bean")
                                     .addModifiers(Modifier.PUBLIC)
-                                    .addCode(getCallBackCode(CallBackType.SUC))
+                                    .addCode(getCallBackCode(CallBackType.SUC, executableElement.getSimpleName().toString()))
                                     .returns(void.class)
                                     .build())
                             .addMethod(MethodSpec.methodBuilder("onFail")
                                     .addParameter(TypeVariableName.get("String..."), "msgs")
-                                    .addCode(getCallBackCode(CallBackType.FAIL))
+                                    .addCode(getCallBackCode(CallBackType.FAIL, ""))
                                     .addModifiers(Modifier.PUBLIC)
                                     .returns(void.class)
                                     .build())
@@ -202,7 +203,7 @@ class NetPresenterSet {
         return netPresenterType.build();
     }
 
-    private String getCallBackCode(CallBackType type) {
+    private String getCallBackCode(CallBackType type, String methodTag) {
         StringBuilder netCallBackCode = new StringBuilder();
         for (Map.Entry<TypeElement, Map<VariableElement, List<ExecutableElement>>> clsEntry : mNetCallBanckElements.entrySet()) {
             if (null == clsEntry.getValue() || clsEntry.getValue().isEmpty()) {
@@ -219,8 +220,8 @@ class NetPresenterSet {
                     if (null != callBack
                             && callBack.value().equals(netService.value())
                             && type == callBack.type()) {
-                        if (!NetPresenterUtil.isEmpty(callBack.tag())) {
-                            if (callBack.tag().equals(element.getSimpleName().toString())) {
+                        if (!NetPresenterUtil.isEmpty(callBack.tag()) && type == CallBackType.SUC) {
+                            if (methodTag.equals(callBack.tag())) {
                                 callMethod = element;
                                 break;
                             }

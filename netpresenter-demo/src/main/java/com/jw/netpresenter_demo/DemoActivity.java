@@ -5,6 +5,7 @@ import android.util.Log;
 
 import com.google.gson.Gson;
 import com.jw.netpresenter_demo.bean.BaseDataBean;
+import com.jw.netpresenter_demo.bean.NetMsgBean;
 import com.jw.netpresenter_demo.bean.NetRequest;
 import com.jw.netpresenter_demo.service.DemoRxJavaService;
 import com.jw.netpresenter_demo.service.DemoRxJavaTwoService;
@@ -15,13 +16,14 @@ import netpresenter.NetPresenter;
 import netpresenter.annotations.CallBackType;
 import netpresenter.annotations.NetCallBack;
 import netpresenter.annotations.NetService;
+import okhttp3.MediaType;
 import okhttp3.RequestBody;
 
 public class DemoActivity extends AppCompatActivity {
     // TAG
     private static final String TAG = "DemoActivity";
     // default
-    @NetService
+    @NetService(value = "DemoRxJavaService")
     DemoRxJavaService mDemoRxJavaService;
     // value and notcancel value为标签和回调的@NetCallBack标签保持一致 notCancel为unBind时不取消的请求数组(格式是方法名)
     @NetService(value = "serviceTwo", notCancel = {"getTwoMsg"})
@@ -41,7 +43,7 @@ public class DemoActivity extends AppCompatActivity {
         mDemoRxJavaService.getTestMsg("key");
         mDemoRxJavaService.getTestMsg("key", "value");
         mDemoRxJavaTwoService.getOneMsg(1);
-        mDemoRxJavaTwoService.getTwoMsg(RequestBody.create(okhttp3.MediaType.parse("application/json; charset=utf-8"), new Gson().toJson(new NetRequest())));
+        mDemoRxJavaTwoService.getTwoMsg(RequestBody.create(MediaType.parse("application/json; charset=utf-8"), new Gson().toJson(new NetRequest())));
 //        mDemoCallService.getCallMsg("key");
     }
 
@@ -90,6 +92,24 @@ public class DemoActivity extends AppCompatActivity {
         super.onDestroy();
         if (null != mBind) {
             NetPresenter.unBind(mBind);
+        }
+    }
+
+    @NetCallBack(value = "DemoRxJavaService", tag = "getTestMsg", type = CallBackType.SUC)
+    public void getDemoRxJavaService_getTestMsgSuc(String tag, BaseDataBean<Object> bean) {
+    }
+
+    @NetCallBack(value = "DemoRxJavaService", tag = "getTestMsg_2", type = CallBackType.SUC)
+    public void getDemoRxJavaService_getTestMsgSuc(String tag, NetMsgBean bean) {
+    }
+
+    @NetCallBack(value = "DemoRxJavaService", type = CallBackType.FAIL)
+    public void getDemoRxJavaServiceFail(String tag, String... msgs) {
+        switch (tag) {
+            case "getTestMsg":
+                break;
+            case "getTestMsg_2":
+                break;
         }
     }
 }
